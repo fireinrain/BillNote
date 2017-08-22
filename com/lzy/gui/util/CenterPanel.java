@@ -1,7 +1,13 @@
 package com.lzy.gui.util;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+
+import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Created by Administrator on 2017/8/21.
@@ -9,13 +15,14 @@ import java.awt.*;
  * 实现panel组件居中显示的工具了
  */
 
-public class CenterPanel extends JPanel{
 
-    private double rate;    //拉伸比例
-    private JComponent jComponent;      //现实的组件
-    private boolean strech;     //是否拉伸
 
-    //构造方法
+public class CenterPanel extends JPanel {
+
+    private double rate;//拉伸比例
+    private JComponent component; //显示的组件
+    private boolean strech; //是否拉伸
+
     public CenterPanel(double rate,boolean strech) {
         this.setLayout(null);
         this.rate = rate;
@@ -23,16 +30,48 @@ public class CenterPanel extends JPanel{
     }
 
     public CenterPanel(double rate) {
-        this.rate = rate;
+        this(rate,true);
     }
 
-
-    public void repaint(){
-        if (null!=jComponent){
-            //获取容器的大小
+    public void repaint() {
+        if (null != component) {
             Dimension containerSize = this.getSize();
-            //获取组件的大小
-            Dimension componentSize = jComponent.getSize();
+            Dimension componentSize= component.getPreferredSize();
+
+            if(strech)
+                component.setSize((int) (containerSize.width * rate), (int) (containerSize.height * rate));
+            else
+                component.setSize(componentSize);
+
+            component.setLocation(containerSize.width / 2 - component.getSize().width / 2, containerSize.height / 2 - component.getSize().height / 2);
         }
+        super.repaint();
     }
+
+    public void show(JComponent p) {
+        this.component = p;
+        Component[] cs = this.getComponents();
+        for (Component c : cs) {
+            this.remove(c);
+        }
+        this.add(p);
+        this.updateUI();
+    }
+
+    public static void main(String[] args) {
+        JFrame f = new JFrame();
+        f.setSize(200, 200);
+        f.setLocationRelativeTo(null);
+        CenterPanel cp = new CenterPanel(0.85,true);
+        f.setContentPane(cp);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
+        JButton b  =new JButton("abc");
+        cp.show(b);
+
+    }
+
 }
+
+
+
