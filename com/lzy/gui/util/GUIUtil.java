@@ -14,7 +14,7 @@ import java.io.File;
  */
 public class GUIUtil {
     //设置图标 图片放置的路径
-    private static String imageFolder = "imgresource";
+    private static String imageFolder = "src/imgresource";
 
     //判断输入框内容是否为空
     public static boolean checkEmpty(JTextField textField,String input){
@@ -70,6 +70,8 @@ public class GUIUtil {
 
     //给组件设置图片 文本 提示文字
     public static void setImageIconTextWord(JButton b,String fileName,String tip){
+        //System.out.println(new File(imageFolder,fileName).getAbsolutePath());
+
         ImageIcon imageIcon = new ImageIcon(new File(imageFolder,fileName).getAbsolutePath());
         b.setIcon(imageIcon);
         b.setPreferredSize(new Dimension(61,81));
