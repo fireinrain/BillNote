@@ -1,5 +1,6 @@
 package com.lzy.gui.panel;
 
+import com.lzy.gui.listener.ToolBarListener;
 import com.lzy.gui.util.CenterPanel;
 import com.lzy.gui.util.GUIUtil;
 
@@ -53,10 +54,23 @@ public class MainPanel extends JPanel{
         this.add(toolBar,BorderLayout.NORTH);
         //添加操作的工作面板
         this.add(workingPanel,BorderLayout.CENTER);
-
+        //事件监听
+        this.addListener();
 
     }
 
+    //为内部组件添加事件监听器
+    private void addListener(){
+        ToolBarListener listener = new ToolBarListener();
+
+        bSpend.addActionListener(listener);
+        bBackup.addActionListener(listener);
+        bCategory.addActionListener(listener);
+        bConfig.addActionListener(listener);
+        bRecover.addActionListener(listener);
+        bRecord.addActionListener(listener);
+        bReport.addActionListener(listener);
+    }
 
     //测试
     public static void main(String[] args){
