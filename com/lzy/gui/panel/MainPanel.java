@@ -2,7 +2,6 @@ package com.lzy.gui.panel;
 
 import com.lzy.gui.util.CenterPanel;
 import com.lzy.gui.util.GUIUtil;
-import sun.applet.Main;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +15,7 @@ public class MainPanel extends JPanel{
 
     }
 
-    public static MainPanel mainPanel = new MainPanel();
+    public static MainPanel instance = new MainPanel();
 
     //一系列功能按钮
     public JToolBar toolBar = new JToolBar();
@@ -61,7 +60,7 @@ public class MainPanel extends JPanel{
 
     //测试
     public static void main(String[] args){
-        GUIUtil.showPanel(MainPanel.mainPanel,1);
+        GUIUtil.showPanel(MainPanel.instance,1);
     }
 
 }
