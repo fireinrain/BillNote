@@ -13,7 +13,7 @@ import java.awt.*;
 public class SpendPanel extends JPanel{
 
     //单例
-    public static SpendPanel spInstance = new SpendPanel();
+    public static SpendPanel instance = new SpendPanel();
 
     public JLabel lMonthSpend = new JLabel("本月消费");
     public JLabel lTodaySpend = new JLabel("今日消费");
@@ -105,6 +105,6 @@ public class SpendPanel extends JPanel{
     }
 
     public static void main(String[] args){
-        GUIUtil.showPanel(SpendPanel.spInstance);
+        GUIUtil.showPanel(SpendPanel.instance);
     }
 }
