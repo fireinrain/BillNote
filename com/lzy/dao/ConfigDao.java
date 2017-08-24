@@ -48,7 +48,7 @@ public class ConfigDao {
 
     //删除
     public void delete(int id){
-        String sql = "delete * from config where id="+id;
+        String sql = "delete from config where id="+id;
         try(Connection connection = DBUtil.getConnection(); Statement s = connection.createStatement()){
            s.execute(sql);
         }catch (SQLException e){
@@ -60,7 +60,7 @@ public class ConfigDao {
     public Config get(int id){
         Config config = null;
         try(Connection connection = DBUtil.getConnection(); Statement s = connection.createStatement()){
-            String sql = "select * form config where id="+id;
+            String sql = "select * from config where id="+id;
 
             ResultSet resultSet = s.executeQuery(sql);
             if (resultSet.next()){
@@ -79,7 +79,7 @@ public class ConfigDao {
     }
 
     //查询所有
-    public List<Config> lsit(){
+    public List<Config> list(){
         /*
          List<Config> configList = new ArrayList <>();
         try(Connection connection = DBUtil.getConnection(); Statement s = connection.createStatement()){
@@ -111,10 +111,12 @@ public class ConfigDao {
     //分页查询
     public List<Config> list(int start,int count){
         List<Config> configList = new ArrayList <>();
-        try(Connection connection = DBUtil.getConnection(); Statement s = connection.createStatement()){
-            String sql = "select * from config order by id desc limit ?,?";
+        String sql = "select * from config order by id desc limit ?,?";
+        try(Connection connection = DBUtil.getConnection(); PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setInt(1,start);
+            ps.setInt(2,count);
 
-            ResultSet resultSet = s.executeQuery(sql);
+            ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
 
                 Config c = new Config();
@@ -144,7 +146,7 @@ public class ConfigDao {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                resultSet.getInt(1);
+                total = resultSet.getInt(1);
             }
             System.out.println("总记录："+total);
         }catch (SQLException e){
@@ -177,5 +179,22 @@ public class ConfigDao {
             e.printStackTrace();
         }
         return config;
+    }
+
+    public static void main(String[] args) {
+        Config config = new Config();
+        config.key = "dir";
+        config.value = "src//c";
+        ConfigDao configDao = new ConfigDao();
+
+        //configDao.add(config);
+        //config.value = "hehe";
+        //configDao.update(config);
+        //configDao.delete(3);
+        //System.out.println(configDao.get(2));
+        //System.out.println(configDao.list());
+        //configDao.getTotal();
+        //System.out.println(configDao.getByKey("dir"));
+
     }
 }
