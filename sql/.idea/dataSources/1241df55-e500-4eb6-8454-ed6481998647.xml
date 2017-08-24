@@ -26,6 +26,7 @@
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="19" parent="15" name="name">
       <Position>2</Position>
@@ -41,6 +42,7 @@
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="22" parent="16" name="key_">
       <Position>2</Position>
@@ -59,7 +61,6 @@
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="26" parent="17" name="spend">

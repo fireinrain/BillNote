@@ -34,4 +34,13 @@ public class Category {
     public void setRecordNumber(int recordNumber) {
         this.recordNumber = recordNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", recordNumber=" + recordNumber +
+                '}';
+    }
 }

@@ -28,8 +28,8 @@ public class DBUtil {
     //返回数据库连接对象
     public static Connection getConnection() throws SQLException{
         String url = String.format("jdbc:mysql://%s:%d/%s?characterEncoding=%s",ip,
-                                        port,database,encoding,loginName,password);
-        return DriverManager.getConnection(url);
+                                        port,database,encoding);
+        return DriverManager.getConnection(url,loginName,password);
 
     }
 

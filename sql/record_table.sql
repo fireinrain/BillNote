@@ -21,3 +21,4 @@ ALTER TABLE record CHANGE id id int AUTO_INCREMENT;
 
 # 为外键增加约束来保持数据的一致性
 ALTER TABLE record ADD CONSTRAINT fk_record_category FOREIGN KEY (cid) REFERENCES category(id);
+# DROP TABLE record;
