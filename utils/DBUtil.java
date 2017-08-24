@@ -30,6 +30,9 @@ public class DBUtil {
         String url = String.format("jdbc:mysql://%s:%d/%s?characterEncoding=%s",ip,
                                         port,database,encoding,loginName,password);
         return DriverManager.getConnection(url);
+
     }
+
+
 
 }
