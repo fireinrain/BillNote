@@ -1,5 +1,6 @@
 package com.lzy.gui.panel;
 
+import com.lzy.gui.listener.ConfigListener;
 import com.lzy.gui.util.ColorUtil;
 import com.lzy.gui.util.GUIUtil;
 
@@ -47,6 +48,17 @@ public class ConfigPanel extends JPanel{
         pSubmit.add(bSubmit);
         this.add(pSubmit,BorderLayout.CENTER);
 
+        //添加事件监听器
+        this.addListener();
+
+
+
+    }
+
+    //时间监听器
+    public void addListener(){
+        ConfigListener configListener = new ConfigListener();
+        bSubmit.addActionListener(configListener);
     }
 
     //测试
