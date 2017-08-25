@@ -1,8 +1,10 @@
 package com.lzy.gui.panel;
 
+import com.lzy.gui.page.SpendPage;
 import com.lzy.gui.util.CircleProgressBar;
 import com.lzy.gui.util.ColorUtil;
 import com.lzy.gui.util.GUIUtil;
+import com.lzy.service.SpendService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,7 @@ import java.awt.*;
 /**
  * Created by Administrator on 2017/8/21.
  */
-public class SpendPanel extends JPanel{
+public class SpendPanel extends AbstractWorkingPanel{
 
     //单例
     public static SpendPanel instance = new SpendPanel();
@@ -106,5 +108,38 @@ public class SpendPanel extends JPanel{
 
     public static void main(String[] args){
         GUIUtil.showPanel(SpendPanel.instance);
+    }
+
+    @Override
+    public void updateData() {
+        SpendPage spendPage = new SpendService().getSpendPage();
+        vMonthSpend.setText(spendPage.monthSpend);
+        vMonthSpend.setText(spendPage.monthSpend);
+        vTodaySpend.setText(spendPage.todaySpend);
+        vAvgSpendPerDay.setText(spendPage.avgSpendPerDay);
+        vMonthAvailable.setText(spendPage.monthAvailable);
+        vDayAvgAvailable.setText(spendPage.dayAvgAvailable);
+        vMonthLeftDay.setText(spendPage.monthLeftDay);
+
+        circleProgressBar.setProgress(spendPage.usePercentage);
+
+        //如果超支
+        if (spendPage.isOverSpend){
+            vMonthAvailable.setForeground(ColorUtil.warningColor);
+            vMonthSpend.setForeground(ColorUtil.warningColor);
+            vTodaySpend.setForeground(ColorUtil.warningColor);
+
+        }else {
+            vMonthAvailable.setForeground(ColorUtil.grayColor);
+            vMonthSpend.setForeground(ColorUtil.blueColor);
+            vTodaySpend.setForeground(ColorUtil.blueColor);
+        }
+        circleProgressBar.setForegroundColor(ColorUtil.getByPercentage(spendPage.usePercentage));
+        addListener();
+    }
+
+    @Override
+    public void addListener() {
+
     }
 }

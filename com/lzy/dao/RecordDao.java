@@ -212,6 +212,10 @@ public class RecordDao {
         return recordList;
     }
 
+    //今天的消费记录
+    public List<Record> listToday(){
+        return list(DateUtil.today());
+    }
     //整个月的消费记录
     public List<Record> listThisMonth(){
         return list(DateUtil.monthBegin(),DateUtil.monthEnd());

@@ -54,6 +54,7 @@ public class CenterPanel extends JPanel {
 
         //判断显示的组件是否是工作功能panel
         if(p instanceof AbstractWorkingPanel){
+            //更新数据
             ((AbstractWorkingPanel) p).updateData();
         }
         this.updateUI();
