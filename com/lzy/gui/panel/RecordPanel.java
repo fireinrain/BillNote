@@ -1,8 +1,11 @@
 package com.lzy.gui.panel;
 
+import com.lzy.entity.Category;
+import com.lzy.gui.listener.RecordListener;
 import com.lzy.gui.model.CategoryComboBoxModel;
 import com.lzy.gui.util.ColorUtil;
 import com.lzy.gui.util.GUIUtil;
+import com.lzy.service.CategoryService;
 import org.jdesktop.swingx.JXDatePicker;
 
 
@@ -13,7 +16,7 @@ import java.util.Date;
 /**
  * Created by Administrator on 2017/8/23.
  */
-public class RecordPanel extends JPanel{
+public class RecordPanel extends AbstractWorkingPanel{
     //使用皮肤
     static {
         GUIUtil.useLiquidSkin();
@@ -31,7 +34,7 @@ public class RecordPanel extends JPanel{
     //分类数据模型
     public CategoryComboBoxModel comboBoxModel = new CategoryComboBoxModel();
     //分类数据模型（下拉框）
-    public JComboBox<String> cbCategory = new JComboBox <>(comboBoxModel);
+    public JComboBox<Category> cbCategory = new JComboBox <>(comboBoxModel);
     //备注文本域
     public JTextField textFieldComment = new JTextField();
     //日期控件
@@ -76,5 +79,31 @@ public class RecordPanel extends JPanel{
     //测试入口
     public static void main(String[] args){
         GUIUtil.showPanel(RecordPanel.instance);
+    }
+
+    public Category getSelectedCategory(){
+        return (Category)cbCategory.getSelectedItem();
+    }
+    @Override
+    public void updateData() {
+        comboBoxModel.cs = new CategoryService().list();
+        cbCategory.updateUI();
+        resetInput();
+        textFieldSpend.grabFocus();
+    }
+
+    public void resetInput(){
+        textFieldSpend.setText("0");
+        textFieldComment.setText("");
+        if (0!=comboBoxModel.cs.size()){
+            cbCategory.setSelectedIndex(0);
+        }
+        datePicker.setDate(new Date());
+    }
+
+    @Override
+    public void addListener() {
+        RecordListener listener = new RecordListener();
+        jButtonSub.addActionListener(listener);
     }
 }
