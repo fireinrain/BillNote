@@ -33,6 +33,7 @@ public class RecordListener implements ActionListener{
 
         int spend = Integer.parseInt(recordPanel.textFieldSpend.getText());
         Category category = recordPanel.getSelectedCategory();
+
         String comment = recordPanel.textFieldComment.getText();
         Date date = recordPanel.datePicker.getDate();
         new RecordService().add(spend,category,comment,date);

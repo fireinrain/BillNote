@@ -1,7 +1,7 @@
 package com.lzy.gui.model;
 
-import com.lzy.dao.CategoryDao;
 import com.lzy.entity.Category;
+import com.lzy.service.CategoryService;
 
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
@@ -18,7 +18,7 @@ import java.util.List;
 //category的数据控件模型
 public class CategoryComboBoxModel implements ComboBoxModel<Category>{
 
-    public List<Category> cs = new CategoryDao().list();
+    public List<Category> cs = new CategoryService().list();
 
     public Category c;
 

@@ -72,7 +72,8 @@ public class RecordPanel extends AbstractWorkingPanel{
         this.setLayout(new BorderLayout());
         this.add(pInput,BorderLayout.NORTH);
         this.add(pSubmit,BorderLayout.CENTER);
-
+        //添加事件监听器
+        this.addListener();
 
     }
 
