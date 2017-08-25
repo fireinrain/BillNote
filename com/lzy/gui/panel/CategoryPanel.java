@@ -16,7 +16,7 @@ import java.awt.*;
  *
  * 分类展示页面
  */
-public class CategoryPanel extends JPanel{
+public class CategoryPanel extends AbstractWorkingPanel{
     static {
         GUIUtil.useLiquidSkin();
     }

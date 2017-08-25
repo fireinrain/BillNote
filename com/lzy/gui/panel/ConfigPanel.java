@@ -3,6 +3,7 @@ package com.lzy.gui.panel;
 import com.lzy.gui.listener.ConfigListener;
 import com.lzy.gui.util.ColorUtil;
 import com.lzy.gui.util.GUIUtil;
+import com.lzy.service.ConfigService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.*;
 /**
  * Created by Administrator on 2017/8/24.
  */
-public class ConfigPanel extends JPanel{
+public class ConfigPanel extends AbstractWorkingPanel{
     static {
         GUIUtil.useLiquidSkin();
 
@@ -53,6 +54,16 @@ public class ConfigPanel extends JPanel{
 
 
 
+    }
+
+    //更新显示数据
+    @Override
+    public void updateData() {
+       String budget = new ConfigService().get(ConfigService.budget);
+       String mysqlPath = new ConfigService().get(ConfigService.mysqlPath);
+       textFieldBudget.setText(budget);
+       textFieldMysql.setText(mysqlPath);
+       textFieldBudget.grabFocus();
     }
 
     //时间监听器
