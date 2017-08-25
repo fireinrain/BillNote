@@ -1,17 +1,13 @@
 package com.lzy.gui.util;
 
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
+import com.lzy.entity.Record;
 import com.objectplanet.chart.BarChart;
 import com.objectplanet.chart.Chart;
+
+import java.awt.*;
+import java.util.List;
+
 
 /**
  * Created by Administrator on 2017/8/22.
@@ -30,33 +26,55 @@ public class CharUtil {
         return max;
     }
 
-    //获取数据标签(私有)
-    private static String[] sampleLabels(){
+    //给定默认数据使用
+    private static double[] sampleValues() {
+
+        double[] result = new double[30];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = (int) (Math.random() * 300);
+        }
+        return result;
+
+    }
+    //给定默认数据使用
+    private static String[] sampleLabels() {
         String[] sampleLabels = new String[30];
+
+        for (int i = 0; i < sampleLabels.length; i++) {
+            if (0 == i % 5)
+                sampleLabels[i] = String.valueOf(i + 1 + "日");
+        }
+        return sampleLabels;
+    }
+
+    //获取数据标签(私有)
+    private static String[] sampleLabels(List<Record> recordList){
+        String[] sampleLabels = new String[recordList.size()];
 
         for (int i = 0; i <sampleLabels.length ; i++) {
             if (0==i%5)
-                sampleLabels[i] = String.valueOf(i+1+"日");
+               sampleLabels[i] = String.valueOf(i+1);
         }
         return sampleLabels;
     }
 
     //获取样本数据（私有）
-    private static double[] sampleValues(){
+    private static double[] sampleValues(List<Record> recordList){
 
-        double[] result = new double[30];
+        double[] result = new double[recordList.size()];
         for (int i = 0; i <result.length ; i++) {
-            result[i] = (int)(Math.random()*300);
+            result[i] = recordList.get(i).spend;
         }
         return result;
     }
 
     //获取样本生成的图片
-    public static Image getImage(int width,int height){
+    public static Image getImage(List<Record> recordList,int width,int height){
         //模拟样本数据
-        double[] sampleValues = sampleValues();
+        double[] sampleValues = sampleValues(recordList);
         //下方显示的文字
-        String[] sampleLabels = sampleLabels();
+        String[] sampleLabels = sampleLabels(recordList);
+
         //样本中的最大值
         int max = max(sampleValues);
 
@@ -71,6 +89,7 @@ public class CharUtil {
         //设置样本数据
         chart.setSampleValues(0,sampleValues);
         //设置文字
+
         chart.setSampleLabels(sampleLabels);
         //设置样本颜色
         chart.setSampleColors(sampleColors);
@@ -84,7 +103,7 @@ public class CharUtil {
         chart.setSampleLabelStyle(Chart.BELOW);
 
         //样本值的字体
-        chart.setFont("rangeLabelFont",new Font("Arial",Font.BOLD,12));
+        chart.setFont("rangeLabelFont",new Font("Arial", Font.BOLD,12));
         //显示图例说明
         chart.setLegendOn(true);
         //把图例说明放在左侧
@@ -94,7 +113,7 @@ public class CharUtil {
         //图例说明的字体
         chart.setFont("legendFont",new Font("Dialog",Font.BOLD,13));
         //下方文字的字体
-        chart.setFont("sampleLabelFont",new Font("Dialog",Font.BOLD,13));
+        chart.setFont("sampleLabelFont",new Font("Dialog",Font.BOLD,8));
         //图表中间的背景色
         chart.setChartBackground(Color.WHITE);
         //图表整体的背景色
@@ -106,7 +125,8 @@ public class CharUtil {
 
     //主类测试
     public static void main(String[] args){
-        JPanel jPanel = new JPanel();
+        /*
+         JPanel jPanel = new JPanel();
         JLabel jLabel = new JLabel();
 
         Image image = CharUtil.getImage(400,300);
@@ -114,6 +134,8 @@ public class CharUtil {
         jLabel.setIcon(icon);
         jPanel.add(jLabel);
         GUIUtil.showPanel(jPanel);
+         */
+
     }
 
 
