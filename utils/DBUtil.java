@@ -9,12 +9,12 @@ import java.sql.SQLException;
  */
 public class DBUtil {
     //静态变量
-    static String ip = "127.0.0.1";
-    static int port = 3306;
-    static String database = "hutubill";
-    static String encoding = "UTF-8";
-    static String loginName = "root";
-    static String password = "root";
+    public static String ip = "127.0.0.1";
+    public static int port = 3306;
+    public static String database = "hutubill";
+    public static String encoding = "UTF-8";
+    public static String loginName = "root";
+    public static String password = "root";
 
     //静态块，只加载一次
     static {
