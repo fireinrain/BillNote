@@ -64,7 +64,8 @@ public class SpendService {
         monthLeftDay = DateUtil.thisMonthLeftDay();
 
         //计算日均可用
-        avgSpendPerDay = monthAvailable/monthLeftDay;
+        dayAvgAvailable = monthAvailable/monthLeftDay;
+        //System.out.println(avgSpendPerDay);
 
         //计算使用比例
         usePercentage = monthSpend*100/monthBudget;
