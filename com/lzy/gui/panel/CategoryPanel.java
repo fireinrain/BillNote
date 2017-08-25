@@ -1,8 +1,11 @@
 package com.lzy.gui.panel;
 
+import com.lzy.entity.Category;
+import com.lzy.gui.listener.CategoryListener;
 import com.lzy.gui.model.CategoryTableModel;
 import com.lzy.gui.util.ColorUtil;
 import com.lzy.gui.util.GUIUtil;
+import com.lzy.service.CategoryService;
 
 
 import javax.swing.*;
@@ -42,6 +45,36 @@ public class CategoryPanel extends JPanel{
         this.setLayout(new BorderLayout());
         this.add(jScrollPane,BorderLayout.CENTER);
         this.add(pSubmit,BorderLayout.SOUTH);
+
+        //添加事件监听
+        this.addListener();
+    }
+
+    public Category getSelectedCategory(){
+        int index = table.getSelectedRow();
+        return categoryTableModel.cs.get(index);
+    }
+
+    public void updateData(){
+        categoryTableModel.cs = new CategoryService().list();
+        table.updateUI();
+        table.getSelectionModel().setSelectionInterval(0,0);
+
+        if (0==categoryTableModel.cs.size()){
+            bEdit.setEnabled(false);
+            bDelete.setEnabled(false);
+        }else {
+            bEdit.setEnabled(true);
+            bDelete.setEnabled(true);
+        }
+    }
+
+    //为按钮添加事件监听器
+    public void addListener(){
+        CategoryListener categoryListener = new CategoryListener();
+        bAdd.addActionListener(categoryListener);
+        bEdit.addActionListener(categoryListener);
+        bDelete.addActionListener(categoryListener);
     }
 
     //测试
