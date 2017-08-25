@@ -1,13 +1,9 @@
 package com.lzy.gui.util;
 
-import java.awt.Component;
+import com.lzy.gui.panel.AbstractWorkingPanel;
 
-import java.awt.Dimension;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Administrator on 2017/8/21.
@@ -55,6 +51,11 @@ public class CenterPanel extends JPanel {
             this.remove(c);
         }
         this.add(p);
+
+        //判断显示的组件是否是工作功能panel
+        if(p instanceof AbstractWorkingPanel){
+            ((AbstractWorkingPanel) p).updateData();
+        }
         this.updateUI();
     }
 
